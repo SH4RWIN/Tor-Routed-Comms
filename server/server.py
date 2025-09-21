@@ -10,8 +10,8 @@ from socket_handler import ServerSocketHandler
 # Load environment variables
 load_dotenv()
 
-server_ip = os.getenv("SERVER_IP")
-port = int(os.getenv("PORT"))
+server_ip = os.getenv("SERVER_IP", "127.0.0.1")  # For Tor hidden service, bind to localhost
+port = int(os.getenv("PORT", 12345))
 
 def display_server_info(socket_handler):
     """Display server startup information"""
@@ -27,21 +27,18 @@ def display_server_info(socket_handler):
 
 def main():
     """Main server function"""
-    # Create socket handler
+    # For Tor hidden service, ensure server binds to localhost only
+    # The .onion address is managed by Tor and not used directly in the server code
     socket_handler = ServerSocketHandler(server_ip, port)
-    
     try:
         # Start the server
         if not socket_handler.start_server():
             print("Failed to start server")
             return
-        
         # Display server info
         display_server_info(socket_handler)
-        
         # Run the server loop
         socket_handler.run_server_loop()
-        
     except KeyboardInterrupt:
         print("\nKeyboard interrupt received, shutting down server...")
     except Exception as e:

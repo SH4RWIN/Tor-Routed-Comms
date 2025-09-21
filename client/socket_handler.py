@@ -4,6 +4,7 @@ Handles all socket connections and message communication for the chat client
 """
 
 import socket
+import socks  # PySocks for Tor proxy support
 import threading
 import json
 import time
@@ -38,9 +39,16 @@ class ClientSocketHandler:
         print(f"{color}[{timestamp}] {level}: {message}{Style.RESET_ALL}")
     
     def connect(self):
-        """Connect to the server"""
+        """Connect to the server via Tor if .onion, else direct"""
         try:
-            self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            if self.host and self.host.endswith('.onion'):
+                # Use Tor SOCKS5 proxy
+                self.socket = socks.socksocket()
+                self.socket.set_proxy(socks.SOCKS5, "127.0.0.1", 9050)
+                self.log_message(f"Connecting to {self.host}:{self.port} via Tor SOCKS5 proxy")
+            else:
+                self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                self.log_message(f"Connecting to {self.host}:{self.port} directly")
             self.socket.connect((self.host, self.port))
             self.connected = True
             self.running = True
