@@ -1,4 +1,4 @@
-# 🌐 Dark Comm Terminal Chat
+# 🌐 A Terminal Based Chat Application that routes it's traffic through The Onion Network (TOR or Dark Net)
 
 A beautiful, feature-rich terminal-based chat application with streaming text, color coding, and modern UI/UX.
 
