@@ -82,8 +82,8 @@ class ChatClient:
         """Display welcome screen"""
         console.clear()
         
-        welcome_text = Text("🌐 Dark Comm Terminal Chat", style="bold blue")
-        subtitle = Text("A beautiful terminal-based chat experience", style="italic dim")
+        welcome_text = Text("Secure Communication Terminal", style="bold blue")
+        subtitle = Text("What happens in here, stays in here", style="italic dim")
         
         welcome_panel = Panel(
             Align.center(welcome_text + "\n\n" + subtitle),

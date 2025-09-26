@@ -16,12 +16,12 @@ port = int(os.getenv("PORT", 12345))
 def display_server_info(socket_handler):
     """Display server startup information"""
     print(f"{'='*60}")
-    print(f"🌐 Dark Comm Chat Server")
+    print(f"Secure Communication Server")
     print(f"{'='*60}")
     print(f"Server IP: {server_ip}")
     print(f"Port: {port}")
     print(f"Status: Running")
-    print(f"Connected Clients: {socket_handler.get_connected_clients_count()}")
+    # print(f"Connected Clients: {socket_handler.get_connected_clients_count()}")   # Need to add refreshing mechanism that refreshes itself after a new connection
     print(f"{'='*60}")
     print()
 
